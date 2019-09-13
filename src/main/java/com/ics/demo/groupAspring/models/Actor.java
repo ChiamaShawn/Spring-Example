@@ -17,14 +17,17 @@ public class Actor {
     @NotNull(groups = Movie.Create.class)
     private String name;
 
+    @ManyToOne
+    @JoinColumn(name="movie_id_fk")
 
-    @Column(name = "gender")
+    private Movie movie;
     @NotNull(groups = Movie.Create.class)
     private String gender;
 
+    private String yearReleased;
     private Actor(){}
 
-    public Actor(String name, String gender) {
+    public Actor(String name, String gender, Movie movie) {
         this.name = name;
         this.gender = gender;
     }
@@ -53,6 +56,9 @@ public class Actor {
         this.gender = gender;
     }
 
+    public void setMovie(Long id){
+
+    }
     public interface  Create{}
     public interface  Update{}
 }

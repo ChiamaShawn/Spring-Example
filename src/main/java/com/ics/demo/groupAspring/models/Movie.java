@@ -1,11 +1,21 @@
 package com.ics.demo.groupAspring.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Entity
 @Table(name="movies")
 public class Movie {
+
+    public Movie(){}
+    public Movie(@NotNull(groups = Create.class) String name, String yearReleased, Set<Category> categories) {
+        this.name = name;
+        this.yearReleased = yearReleased;
+        this.categories = categories;
+    }
+
     @Id
+
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     @NotNull(groups = Update.class)
@@ -18,12 +28,20 @@ public class Movie {
     @Column(name = "year_released")
     private String yearReleased;
 
-    private Movie(){}
 
-    public Movie(String name, String year) {
-        this.name = name;
-        this.yearReleased = year;
-    }
+    @ManyToMany(mappedBy = "movies")
+    private Set<Category> categories;
+
+//    public Movie(@NotNull(groups = Create.class) String name, String yearReleased) {
+//        this.name = name;
+//        this.yearReleased = yearReleased;
+//        this.categories = categories;
+//    }
+
+//    public Movie(String name, String year) {
+//        this.name = name;
+//        this.yearReleased = year;
+//    }
 
     public Long getId() {
         return id;
@@ -47,6 +65,16 @@ public class Movie {
 
     public void setYear(String year) {
         this.yearReleased = year;
+    }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", yearReleased='" + yearReleased + '\'' +
+                ", categories=" + categories +
+                '}';
     }
 
     public interface  Create{}

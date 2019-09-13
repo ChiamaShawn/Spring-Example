@@ -1,6 +1,8 @@
 package com.ics.demo.groupAspring.controller;
 
+import com.ics.demo.groupAspring.models.Actor;
 import com.ics.demo.groupAspring.models.Movie;
+import com.ics.demo.groupAspring.service.ActorService;
 import com.ics.demo.groupAspring.service.MovieService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +13,7 @@ import java.util.List;
 @RequestMapping(value = "movies")
 public class MovieController {
     private final MovieService movieService;
+//    private final ActorService actorService;
 
     public MovieController(MovieService movieService) {
         this.movieService = movieService;
@@ -30,7 +33,6 @@ public class MovieController {
     public Movie create(@Validated({Movie.Create.class}) @RequestBody Movie movie){
         return movieService.create(movie);
     }
-
     @DeleteMapping(value = "{id}")
     public void delete(@PathVariable Long id){
         movieService.delete(id);
