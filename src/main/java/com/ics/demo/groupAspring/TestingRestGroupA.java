@@ -2,6 +2,7 @@ package com.ics.demo.groupAspring;
 
 
 import com.ics.demo.groupAspring.models.Movie;
+import com.ics.demo.groupAspring.models.Student;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -27,6 +28,16 @@ public class TestingRestGroupA implements CommandLineRunner {
         System.out.println(movies.toString());
         Movie movie = restTemplate.getForObject("http://10.51.10.111:9090/movies/3", Movie.class);
         System.err.println(movie.toString());
+
+        String url = "http://10.51.10.111:9090/movies/search?name="+movie.getName();
+        Movie movieByName = restTemplate.getForObject(
+                url
+                , Movie.class
+        );
+        System.err.println(movieByName.toString());
     }
+
+
+
 
 }

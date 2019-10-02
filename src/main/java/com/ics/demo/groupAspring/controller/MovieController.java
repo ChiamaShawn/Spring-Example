@@ -4,13 +4,15 @@ import com.ics.demo.groupAspring.models.Actor;
 import com.ics.demo.groupAspring.models.Movie;
 import com.ics.demo.groupAspring.service.ActorService;
 import com.ics.demo.groupAspring.service.MovieService;
+import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "movies")
+@RequestMapping(value = "movies", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 public class MovieController {
     private final MovieService movieService;
 //    private final ActorService actorService;
